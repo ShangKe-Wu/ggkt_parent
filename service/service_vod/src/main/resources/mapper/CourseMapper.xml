@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wsk.parent.vod.mapper.CourseMapper">
+
+    <sql id="tables">
+        course c
+        LEFT JOIN teacher t ON c.teacher_id = t.id
+        LEFT JOIN subject s1 ON c.subject_parent_id = s1.id
+        LEFT JOIN subject s2 ON c.subject_id = s2.id
+    </sql>
+
+<!--CoursePublishVo getCoursePublishVo(Long id); 三表连接 teacher subject-->
+<select id="getCoursePublishVo" resultType="com.wsk.ggkt.vo.vod.CoursePublishVo">
+    select
+        c.id,
+        c.title,
+        c.cover,
+        c.lesson_num AS lessonNum,
+        c.price,
+        t.name AS teacherName,
+        s1.title AS subjectParentTitle,
+        s2.title AS subjectTitle
+    from course c
+    left outer join teacher t on t.id = c.teacher_id
+    left outer join subject s1 on s1.id = c.subject_parent_id
+    left outer join subject s2 on s2.id = c.subject_id
+    where c.id=#{id}
+</select>
+
+<!--CourseVo selectCourseVoById(Long courseId) 多表连接查询 course  teacher subject-->
+<select id="selectCourseVoById" resultType="com.wsk.ggkt.vo.vod.CourseVo">
+    select
+        c.id,
+        c.title,
+        c.lesson_num AS lessonNum,
+        c.price,
+        c.cover,
+        c.buy_count AS buyCount,
+        c.view_count AS viewCount,
+        c.status,
+        c.publish_time AS publishTime,
+        c.teacher_id as teacherId,
+        t.name AS teacherName,
+        s1.title AS subjectParentTitle,
+        s2.title AS subjectTitle
+    from course c
+    left outer join teacher t on t.id = c.teacher_id
+    left outer join subject s1 on s1.id = c.subject_id
+    left outer join subject s2 on s2.id = c.subject_parent_id
+</select>
+</mapper>
