@@ -73,7 +73,7 @@ public class CouponInfoServiceImpl extends ServiceImpl<CouponInfoMapper, CouponI
     public void updateCouponInfoUseStatus(Long couponUseId, Long orderId) {
         //正确写法应该是根据 用户ID 和 优惠券ID 和 优惠券状态 查询数据库，查询优惠券是否存在,查询优惠券数量，如果有多张优惠券，则从list中选一个
         //判断用户是否有优惠券？以及优惠券数量是否足够？还能不能使用？
-        //下面是老师写的，感觉有bug
+        //感觉有bug
         CouponUse couponUse = new CouponUse();
         couponUse.setId(couponUseId);
         couponUse.setOrderId(orderId);

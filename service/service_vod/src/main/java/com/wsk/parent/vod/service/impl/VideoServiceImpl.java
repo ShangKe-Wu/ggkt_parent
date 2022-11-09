@@ -30,7 +30,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     //通过课程ID删除小节，同时删除腾讯云的视频
     @Override
     public void removeByCourseId(Long id) {
-        LambdaQueryWrapper<Video> queryWrapperForVideo = new LambdaQueryWrapper();
+        LambdaQueryWrapper<Video> queryWrapperForVideo = new LambdaQueryWrapper<>();
         queryWrapperForVideo.eq(Video::getCourseId,id);
         List<Video> videos = videoMapper.selectList(queryWrapperForVideo);
         //删除腾讯云视频

@@ -50,7 +50,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
             //复制属性
             BeanUtils.copyProperties(oneMenu,vo);
             //找出相应的二级菜单列表
-            List<Menu> twoMenuList = menuList.stream().filter(menu -> menu.getParentId() == oneMenu.getId()).collect(Collectors.toList());
+            List<Menu> twoMenuList = menuList.stream().filter(menu -> menu.getParentId().equals(oneMenu.getId()) ).collect(Collectors.toList());
             //二级菜单也要转换成VO
             List<MenuVo> children = new ArrayList<>();
             for(Menu twoMenu : twoMenuList){
@@ -69,13 +69,13 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     //获取所有一级菜单
     @Override
     public List<Menu> findMenuOneInfo() {
-        LambdaQueryWrapper<Menu> queryWrapper = new LambdaQueryWrapper();
+        LambdaQueryWrapper<Menu> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(Menu::getParentId,0);
         List<Menu> menus = menuMapper.selectList(queryWrapper);
         return menus;
     }
 
-    //同步公众号菜单，结构参考公众号开发官方文档，其实在wxMpService里面已经帮我们封装好了，写出来只是了解一下底层
+    //同步公众号菜单，结构参考公众号开发官方文档
     @Override
     public void syncMenu() {
         //获取所有菜单数据

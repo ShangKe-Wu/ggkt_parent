@@ -109,6 +109,7 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
     }
 
     //新增点播课程订单（生成订单并返回订单号）
+    //TODO 这里要用SeaTa进行事务管理  -- GlobalTransactional
     @Override
     public Long submitOrder(OrderFormVo orderFormVo) {
         //获取生成订单条件值

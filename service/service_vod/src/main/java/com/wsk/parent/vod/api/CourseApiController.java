@@ -35,7 +35,7 @@ public class CourseApiController {
     //根据关键词查询课程
     @GetMapping("inner/findByKeyword/{keyword}")
     public List<Course> findByKeyword(@PathVariable String keyword){
-        QueryWrapper<Course> queryWrapper = new QueryWrapper();
+        QueryWrapper<Course> queryWrapper = new QueryWrapper<>();
         queryWrapper.like("title", keyword);
         List<Course> list = courseService.list(queryWrapper);
         return list;

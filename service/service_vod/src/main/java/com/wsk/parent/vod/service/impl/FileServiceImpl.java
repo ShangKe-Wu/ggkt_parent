@@ -27,6 +27,7 @@ import java.util.UUID;
 public class FileServiceImpl implements FileService {
     @Override
     public String upload(MultipartFile file) {
+        //初始化客户端
         // 区域
         String endpoint = ConstantPropertiesUtil.END_POINT;
         //桶名称
@@ -46,6 +47,7 @@ public class FileServiceImpl implements FileService {
         // 3 生成 cos 客户端。
         COSClient cosClient = new COSClient(cred, clientConfig);
 
+        //上传流类型文件
         try{
             // 指定要上传的文件
             InputStream inputStream = file.getInputStream();

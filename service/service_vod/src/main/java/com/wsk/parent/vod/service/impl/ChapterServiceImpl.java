@@ -37,7 +37,7 @@ public class ChapterServiceImpl extends ServiceImpl<ChapterMapper, Chapter> impl
     public List<ChapterVo> getNestedTreeList(Long courseId) {
         List<ChapterVo> chapterVoList = new ArrayList<>();
         //获取章节信息
-        LambdaQueryWrapper<Chapter> queryWrapperChapter = new LambdaQueryWrapper();
+        LambdaQueryWrapper<Chapter> queryWrapperChapter = new LambdaQueryWrapper<>();
         queryWrapperChapter.eq(Chapter::getCourseId,courseId);
         queryWrapperChapter.orderByAsc(Chapter::getSort, Chapter::getId);
         List<Chapter> chapterList = chapterMapper.selectList(queryWrapperChapter);

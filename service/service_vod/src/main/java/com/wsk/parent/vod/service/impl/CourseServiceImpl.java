@@ -12,6 +12,7 @@ import com.wsk.serviceutil.exception.GgktException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;
@@ -47,7 +48,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     @Override
     public Map<String, Object> findPage(Page<Course> pageParam, CourseQueryVo courseQueryVo) {
         //封装非空的条件值，然后进行查询
-        LambdaQueryWrapper<Course> queryWrapper = new LambdaQueryWrapper();
+        LambdaQueryWrapper<Course> queryWrapper = new LambdaQueryWrapper<>();
         if(courseQueryVo!=null) {
             //获取对象中的条件值
             String title = courseQueryVo.getTitle();
@@ -93,6 +94,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
     //添加课程信息
     @Override
+    @Transactional
     public Long saveCourseInfo(CourseFormVo courseFormVo) {
         //需要更新两张表：course 和 course_description
         //1.  courseFormVo 转换成 course ，先保存到course表中
@@ -129,6 +131,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
     //根据ID修改课程信息
     @Override
+    @Transactional
     public void updateCourseById(CourseFormVo courseFormVo) {
         //更新两张表 course 和 course_description
         //1. course表
@@ -160,6 +163,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
     //课程删除（同时删除课程下的章节和小节）
     @Override
+    @Transactional
     public void removeCourseById(Long id) {
         //删除小节
         videoService.removeByCourseId(id);

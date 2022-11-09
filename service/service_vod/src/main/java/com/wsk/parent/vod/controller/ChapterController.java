@@ -23,7 +23,7 @@ import java.util.List;
 public class ChapterController {
     @Autowired
     ChapterService chapterService;
-    //获取章节、小节列表
+    //获取章节、小节列表（发布课程--课程大纲页面）
     @GetMapping("/getNestedTreeList/{courseId}")
     public Result getList(@PathVariable Long courseId){
         List<ChapterVo> chapterVoList = chapterService.getNestedTreeList(courseId);

@@ -68,14 +68,14 @@ public class TeacherController {
                         @ApiParam(value = "每页记录数",name = "limit",required = true)@PathVariable("limit") Long limit,
                         @ApiParam(value = "查询条件",name = "teacherQueryVo") @RequestBody(required = false) TeacherQueryVo teacherQueryVo){
         //创建page对象，传入当前页码和每页记录数
-        Page<Teacher> pageParam = new Page(page,limit);
+        Page<Teacher> pageParam = new Page<>(page,limit);
         //提取查询条件中的参数
         String name = teacherQueryVo.getName();//讲师名称
         Integer level = teacherQueryVo.getLevel();//讲师级别
         String joinDateBegin = teacherQueryVo.getJoinDateBegin();//开始时间
         String joinDateEnd = teacherQueryVo.getJoinDateEnd();//结束时间
         //判断是否为空，为空则不封装条件
-        QueryWrapper<Teacher> queryWrapper = new QueryWrapper();
+        QueryWrapper<Teacher> queryWrapper = new QueryWrapper<>();
         if(!StringUtils.isEmpty(name)){
             queryWrapper.like("name",name);//第一个参数代表数据库中的字段名，如果用lambdaQueryWrapper，则是使用对象中的属性名
         }

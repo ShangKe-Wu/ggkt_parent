@@ -44,28 +44,28 @@ public class CourseController {
         return Result.ok(map);
     }
 
-    //添加课程信息
+    //添加课程信息(发布课程页面--课程基本信息)
     @PostMapping("/save")
     public Result save(@RequestBody CourseFormVo courseFormVo){
         Long courseId = courseService.saveCourseInfo(courseFormVo);
         return Result.ok(courseId);
     }
 
-    //获取课程信息
+    //获取课程信息（发布课程页面--课程基本信息）
     @GetMapping("/get/{id}")
     public Result getInfo(@PathVariable Long id){
         CourseFormVo courseFromVoById = courseService.getCourseFromVoById(id);
         return Result.ok(courseFromVoById);
     }
 
-    //更新课程信息
+    //更新课程信息（发布课程页面--课程基本信息）
     @PostMapping("/update")
     public Result update(@RequestBody CourseFormVo courseFormVo){
         courseService.updateCourseById(courseFormVo);
         return Result.ok(courseFormVo.getId());
     }
 
-    //获取发布课程信息
+    //获取发布课程信息(发布课程的最后页面)
     @GetMapping("/getCoursePublishVo/{id}")
     public Result getCoursePublishVo(@PathVariable Long id){
         CoursePublishVo coursePublishVo = courseService.getCoursePublishVo(id);

@@ -90,7 +90,7 @@ public class WxPayServiceImpl implements WxPayService {
     @Override
     public Map<String, String> queryPayStatus(String orderNo) {
         //封装微信接口需要参数，使用map
-        Map paramMap = new HashMap<>();
+        Map<String,String> paramMap = new HashMap<>();
         paramMap.put("appid","wxf913bfa3a2c7eeeb");
         paramMap.put("mch_id","1481962542");
         paramMap.put("out_trade_no", orderNo);

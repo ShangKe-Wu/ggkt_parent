@@ -42,7 +42,7 @@ public class MenuController {
         return Result.ok();
     }
 
-    //获取access_token，用于操作公众号(公众号操作接口需要access_token)
+    //获取access_token，用于操作公众号(公众号操作接口需要access_token)，只是了解底层，上面那个同步功能内部已经给我们封装好了获取access_token的方法
     //通过httpClient发送get请求获取（参考官方文档）
     @GetMapping("/getAccessToken")
     public Result getAccessToken(){
@@ -91,7 +91,7 @@ public class MenuController {
         return Result.ok(menu);
     }
 
-    //新增菜单
+    //新增菜单项
     @PostMapping("/save")
     public Result save(@RequestBody Menu menu) {
         menuService.save(menu);
@@ -112,7 +112,7 @@ public class MenuController {
         return Result.ok(null);
     }
 
-    //批量删除菜单
+    //批量删除菜单项
     @DeleteMapping("/batchRemove")
     public Result batchRemove(@RequestBody List<Long> idList) {
         menuService.removeByIds(idList);
